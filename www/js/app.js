@@ -4,7 +4,8 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers','starter.services'])
+angular.module('starter', ['ionic','ngMessages', 'starter.controllers','starter.services','ngCordova','syzj.directives'])
+
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -28,33 +29,11 @@ angular.module('starter', ['ionic', 'starter.controllers','starter.services'])
     .state('app', {
     url: '/app',
     abstract: true,
-    templateUrl: 'templates/menu.html',
+    templateUrl: 'views/menu/menu.html',
     controller: 'AppCtrl'
   })
 
-    .state('welcome', {
-      url: '/welcome',
-      templateUrl: 'view/welcome/welcome.html',
-    })
-
-    .state('login', {
-      url: '/login',
-      templateUrl: 'view/login/login.html',
-    })
-
-    .state('forgotpassword', {
-      url: '/forgotpassword',
-      templateUrl: 'view/forgotpassword/forgotpassword.html',
-    })
-
-
-    .state('main', {
-      url: '/',
-      controller: 'MainCtel'
-    })
-
-
-    .state('app.search', {
+  .state('app.search', {
     url: '/search',
     views: {
       'menuContent': {
@@ -71,6 +50,107 @@ angular.module('starter', ['ionic', 'starter.controllers','starter.services'])
         }
       }
     })
+    .state('forgotpassword',{
+      url:'/forgotpassword',
+      templateUrl:'views/forgotpassword/forgotpassword.html'
+    })
+
+    .state('login',{
+      url:'/login',
+      templateUrl:'views/forgotpassword/login.html',
+      controller:'LoginCtrl'
+    })
+
+    .state('welcome', {
+      url: '/welcome',
+      templateUrl: 'views/welcome/welcome.html',
+    })
+    .state('main', {
+    url: '/',
+    controller: 'MainCtrl'
+  })
+    .state('app.home', {
+      url: '/home',
+      views:{
+        'menuContent':{
+          templateUrl:'views/home/home.html',
+          controller:'HomeCtrl'
+        }
+      }
+    })
+    .state('app.category-list',{
+      url:'/category-list',
+      views:{
+        'menuContent':{
+          templateUrl: 'views/category/category-list.html',
+          controller: 'CategoryListCtrl'
+        }
+      }
+    })
+    .state('app.category-add',{
+      url:'/category-add/:id/:name',
+      views:{
+        'menuContent':{
+          templateUrl: 'views/category/category-add.html',
+          controller: 'CategoryAddCtrl'
+        }
+      }
+    })
+    .state('app.shop',{
+      url:'/shop',
+      views:{
+        'menuContent':{
+          templateUrl:'views/shop/shop.html',
+          controller:'ShopCtrl'
+        }
+      }
+    })
+    .state('app.shop-edit',{
+      url:'/shop-edit',
+      params:{title:'',property:''},
+      views: {
+        'menuContent': {
+          templateUrl: 'views/shop/shop-edit.html',
+          controller: 'ShopEditCtrl'
+        }
+      }
+    })
+    .state('app.changepassword', {
+      url: '/changepassword',
+      views: {
+        'menuContent': {
+          templateUrl: 'views/changepassword/changepassword.html',
+          controller:'ChangePasswordCtrl'
+        }
+      }
+    })
+    .state('app.setting', {
+      url: '/setting',
+      views: {
+        'menuContent': {
+          templateUrl: 'views/setting/setting.html',
+          controller:'SettingCtrl'
+        }
+      }
+    })
+    .state('app.product-add',{
+      url:'/product-add',
+      views:{
+        'menuContent':{
+          templateUrl: 'views/product/product-add.html',
+          controller: 'ProductAddCtrl'
+        }
+      }
+    })
+    .state('app.product-list',{
+      url:'/product-list',
+      views:{
+        'menuContent':{
+          templateUrl: 'views/product/product-list.html',
+          controller: 'ProductListCtrl'
+        }
+      }
+    })
     .state('app.playlists', {
       url: '/playlists',
       views: {
@@ -81,6 +161,7 @@ angular.module('starter', ['ionic', 'starter.controllers','starter.services'])
       }
     })
 
+
   .state('app.single', {
     url: '/playlists/:playlistId',
     views: {
@@ -90,6 +171,7 @@ angular.module('starter', ['ionic', 'starter.controllers','starter.services'])
       }
     }
   });
+  $urlRouterProvider.otherwise('/');
   // if none of the above states are matched, use this as the fallback
- // $urlRouterProvider.otherwise('/app/playlists');
+  //$urlRouterProvider.otherwise('/app/playlists');
 });
